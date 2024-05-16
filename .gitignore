@@ -1,0 +1,9 @@
+other-docker-services/mongodata
+other-docker-services/redis-data
+other-docker-services/rabbitmq-vol
+other-docker-services/rabbitmq-logs
+
+
+user/.env
+user/node_modules
+user/src/config/servicesAccountKey.json

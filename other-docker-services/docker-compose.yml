@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:  
+  db:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodata:/data/db
+    restart: unless-stopped
+  
+  redis-cache:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis-data:/data
+    restart: unless-stopped
+  
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ./rabbitmq-vol:/var/lib/rabbitmq/
+        - ./rabbitmq-logs:/var/log/rabbitmq
+    networks:
+        - rabbitmq_go_net
+    
+
+ 
+volumes:
+  mongodata:
+  redis-data:
+  rabbitmq-vol:
+  rabbitmq-logs:
+
+
+networks:
+  rabbitmq_go_net:
+    driver: bridge
